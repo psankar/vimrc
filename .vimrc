@@ -1,86 +1,68 @@
-"set autoindent
-set nu
-set smartindent
-set showmatch
-set textwidth=80
-set title
+set number
+set ic
+set guifont=Ubuntu\ Mono\ 14
 set incsearch
 set hlsearch
-set ic
 
-" always show file name
-set modeline
-set ls=2
+execute pathogen#infect()
+syntax on
+filetype plugin indent on
+
 
 " Start vim in maximized mode
 set lines=999 columns=999
-set guifont=Monospace\ 11
 
 " Remove toolbar incase of gvim
 set guioptions-=T
 
-" Do not let the cursor go until the edge of the screen
-" set so=14
-
-" colorscheme
-colorscheme molokai
-" https://github.com/tomasr/molokai
-
-syntax on
-filetype plugin indent on
-
-" Highlight cursor line.
-augroup CursorLine
-  au!
-  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-"  au VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
-  au WinLeave * setlocal nocursorline
-"  au WinLeave * setlocal nocursorcolumn
-augroup END
-
-" Make trailing whitespace annoyingly highlighted.
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
-
-" Map F8 for new tab
-imap <F8> :tabnew
-map <F8> :tabnew
-
-" Map F2 for save
-imap <F2> :w
-map <F2> :w
-
-" Call Pathogen for bundle maintenance
-execute pathogen#infect()
-
-"let g:molokai_original = 1
+" 256 colors for molokai
 let g:rehash256 = 1
+colorscheme molokai
+"colorscheme wombat
 
-" Plugins Needed
-" http://cscope.sourceforge.net/cscope_maps.vim
-" http://www.vim.org/scripts/script.php?script_id=273 - TagList
-" vim-plugin-gitdiff
-" vim-plugin-multiplesearch
-" vim-plugin-showmarks
-" https://github.com/tpope/vim-pathogen
-" https://github.com/scrooloose/syntastic
-" https://github.com/Valloric/YouCompleteMe
+" vim-go options
+let g:go_fmt_command = "goimports"
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let NERDTreeQuitOnOpen = 1
 
+" YCM options after these other plugins (the defaults of vim-go changed somehow)
+let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_min_num_of_chars_for_completion = 1
+let g:ycm_auto_trigger = 1
+set completeopt-=preview
 
-" Things related to Go
-filetype off
-filetype plugin indent off
-set runtimepath+=$GOROOT/misc/vim
-filetype plugin indent on
-syntax on
+nnoremap <F8> :TagbarToggle
+nnoremap <F12> :NERDTreeToggle<CR>
 
-" Show Taglist pane automatically and highlight
-let Tlist_Auto_Open = 1
-let Tlist_Display_Prototype = 1
+map <Space> <PageDown>
+map <S-Space> <PageUp>
+nnoremap <F2> :w! <CR>
+nnoremap <C-s> :w! <CR>
 
+map <C-x> "+x
+map <C-c> "+y 
+imap <A-v> "+gPi
+map <F10> <Esc>;call ToggleGUICruft()<cr>
+map <F11> ;set fullscreen<cr>
 
-autocmd BufRead /home/psankar/svn/trunk/nss-git/*.c execute '%!/home/psankar/src/linux/scripts/Lindent' | setlocal nomodified
+" by default, hide gui menus
+set guioptions=i
+
+" show the cursor line
+set cursorline
+
+nnoremap ; :
+nnoremap : ;
+
+" Tab Control (others)
+map <A-1> 1gt
+map <A-2> 2gt
+map <A-3> 3gt
+map <A-4> 4gt
+map <A-5> 5gt
+map <A-6> 6gt
+map <A-7> 7gt
+map <A-8> 8gt
+map <A-9> gtl
